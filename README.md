@@ -23,8 +23,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 
   <!-- Fancybox -->
-  <script type="module" crossorigin src="/assets/index-D2Xdc00a.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Dqh_Z2XQ.css">
+  <script type="module" crossorigin src="./assets/index-D2Xdc00a.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Dqh_Z2XQ.css">
 </head>
 
 <body>
