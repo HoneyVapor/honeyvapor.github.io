@@ -4,18 +4,13 @@
   <meta charset="UTF-8" />
   <link rel="shortcut icon" href="./img/Creart_logo_v2.jpg" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Creart App</title>
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <!-- Material UI (installed) -->
-
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,13 +18,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 
   <!-- Fancybox -->
-  <script type="module" crossorigin src="./assets/index-D2Xdc00a.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Dqh_Z2XQ.css">
+  <script type="module" crossorigin src="/assets/index-D2Xdc00a.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Dqh_Z2XQ.css">
 </head>
 
 <body>
   <div id="root"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </body>
 
 </html>
