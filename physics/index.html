@@ -1,1 +1,389 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Física Universitaria | Temario Completo</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+    <style>
+        /* Estilos Custom */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        .section-header { position: relative; padding-left: 1rem; }
+        .section-header::before {
+            content: ''; position: absolute; left: 0; top: 10%; height: 80%; width: 4px; border-radius: 2px;
+        }
+        /* Acentos de color por bloque */
+        .theme-mec::before { background-color: #38bdf8; } 
+        .theme-vec::before { background-color: #a8a29e; } 
+        .theme-termo::before { background-color: #fb923c; } 
+        .theme-elec::before { background-color: #fbbf24; } 
+        
+        .calc-btn:active { transform: scale(0.95); }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-300 font-sans antialiased">
+
+    <nav class="fixed w-full z-50 bg-slate-950/90 backdrop-blur border-b border-slate-800">
+        <div class="max-w-screen-2xl mx-auto px-4 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">⚛️</span>
+                <span class="font-bold text-white tracking-wide">PHYSICS<span class="text-emerald-500">_DASHBOARD</span></span>
+            </div>
+            <div class="hidden lg:flex gap-1 text-[10px] font-mono uppercase tracking-wider">
+                <a href="#cine" class="px-3 py-1 rounded hover:bg-sky-900/30 text-sky-400">Cinemática</a>
+                <a href="#vec" class="px-3 py-1 rounded hover:bg-stone-800 text-stone-400">Vectores</a>
+                <a href="#din" class="px-3 py-1 rounded hover:bg-indigo-900/30 text-indigo-400">Dinámica</a>
+                <a href="#energia" class="px-3 py-1 rounded hover:bg-purple-900/30 text-purple-400">Energía</a>
+                <a href="#termo" class="px-3 py-1 rounded hover:bg-orange-900/30 text-orange-400">Termo</a>
+                <a href="#elec" class="px-3 py-1 rounded hover:bg-amber-900/30 text-amber-400">Electro</a>
+                <a href="#calculadora-section" class="lg:hidden px-3 py-1 rounded bg-emerald-900/30 text-emerald-400">Calc</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-screen-2xl mx-auto pt-20 pb-10 px-4 grid grid-cols-1 xl:grid-cols-4 gap-6">
+        
+        <main class="xl:col-span-3 space-y-10 order-1">
+
+            <section id="cine" class="scroll-mt-20">
+                <h2 class="text-xl font-bold text-sky-400 mb-4 section-header theme-mec border-b border-sky-900/30 pb-2">MRU, MRUV y Tiros</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-sky-500 font-bold text-sm">MRU (Partes 1 y 2)</h3>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400">Vel. Constante</span>
+                        </div>
+                        $$ v = \frac{d}{t} \quad x_f = x_0 + v \cdot t $$
+                        <p class="text-[10px] text-slate-500 mt-2 italic">Sin aceleración. Gráfica x vs t es una recta.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-sky-500 font-bold text-sm">MRUV (Partes 1 y 2)</h3>
+                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400">$a$ Constante</span>
+                        </div>
+                        <div class="text-sm space-y-1">
+                            $$ v_f = v_0 + at $$
+                            $$ x = x_0 + v_0 t + \frac{1}{2}at^2 $$
+                            $$ v_f^2 = v_0^2 + 2ax $$
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-sky-500 font-bold text-sm mb-2">Caída Libre & Tiro Vertical</h3>
+                        <div class="text-sm">
+                            $$ y = y_0 + v_{0y}t - \frac{1}{2}gt^2 $$
+                            <p class="text-xs text-yellow-500 mt-2 font-bold">Caso Especial (Altura Max):</p>
+                            $$ h_{max} = \frac{v_{0y}^2}{2g} \quad t_{subida} = \frac{v_{0y}}{g} $$
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg lg:col-span-3">
+                        <h3 class="text-sky-500 font-bold text-sm mb-2">Tiro Parabólico y Correcciones</h3>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Eje X (MRU):</span>
+                                $ v_x = v_0 \cos\theta $ <br>
+                                $ x = v_x \cdot t $
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-500 block">Eje Y (MRUV):</span>
+                                $ v_y = v_0 \sin\theta - gt $ <br>
+                                $ y = y_0 + v_{0y}t - \frac{1}{2}gt^2 $
+                            </div>
+                            <div class="bg-slate-800/50 p-2 rounded">
+                                <span class="text-xs text-orange-400 block font-bold">Corrección de Tiro:</span>
+                                <p class="text-[10px] text-slate-400">Si el punto de llegada no está al mismo nivel, usar la ecuación cuadrática en $y(t)$. <br> $\theta$ afecta alcance max (45° ideal sin aire).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="vec" class="scroll-mt-20">
+                <h2 class="text-xl font-bold text-stone-300 mb-4 section-header theme-vec border-b border-stone-800 pb-2">Vectores y Aplicaciones</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-stone-300 font-bold text-sm mb-2">Fundamentos (P1 y P2)</h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <span class="text-[10px] text-slate-500 uppercase">Magnitud:</span>
+                                $$ |V| = \sqrt{V_x^2 + V_y^2} $$
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-500 uppercase">Dirección:</span>
+                                $$ \theta = \tan^{-1}\left(\frac{V_y}{V_x}\right) $$
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-stone-300 font-bold text-sm mb-2">Aplicación de Vectores (P1-P3)</h3>
+                        <ul class="text-xs space-y-2 list-disc pl-4 text-slate-400">
+                            <li><strong>Suma de Fuerzas:</strong> $\sum F_x$ y $\sum F_y$ para equilibrio.</li>
+                            <li><strong>Navegación:</strong> Velocidad del viento + Velocidad avión.</li>
+                            <li><strong>Planos Inclinados:</strong> Descomponer peso $mg \sin\theta$ y $mg \cos\theta$.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="din" class="scroll-mt-20">
+                <h2 class="text-xl font-bold text-indigo-400 mb-4 section-header theme-mec border-b border-indigo-900/30 pb-2">Dinámica y Gravitación</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-indigo-400 font-bold text-sm mb-2">Sistemas de Bloques (1-3)</h3>
+                        <p class="text-[10px] text-slate-400 mb-2">Para cuerpos conectados (cuerdas/poleas):</p>
+                        $$ a_{sist} = \frac{\sum F_{favor} - \sum F_{contra}}{m_{total}} $$
+                        <p class="text-[10px] text-slate-500 mt-1">DCL individual para hallar Tensión ($T$).</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-indigo-400 font-bold text-sm mb-2">Mov. Circular (P1 y P2)</h3>
+                        $$ a_c = \frac{v^2}{r} = \omega^2 r $$
+                        $$ F_c = m a_c $$
+                        $$ T = \frac{2\pi r}{v} \quad f = 1/T $$
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-indigo-400 font-bold text-sm mb-2">Ley Gravitación (P1 y P2)</h3>
+                        $$ F_G = G \frac{m_1 m_2}{r^2} $$
+                        $$ g_{planeta} = G \frac{M}{R^2} $$
+                        <span class="text-[10px] text-slate-500">G = 6.67e-11</span>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg lg:col-span-3">
+                        <h3 class="text-indigo-400 font-bold text-sm mb-2">Cantidad de Movimiento e Impulso</h3>
+                        <div class="flex flex-wrap gap-8 items-center justify-center">
+                            <div>$$ p = mv $$</div>
+                            <div>$$ I = F \Delta t = \Delta p $$</div>
+                            <div class="text-xs text-slate-400 border-l border-slate-700 pl-4">
+                                <strong>Conservación:</strong> $m_1v_{1i} + m_2v_{2i} = m_1v_{1f} + m_2v_{2f}$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="energia" class="scroll-mt-20">
+                <div class="bg-slate-900 border border-indigo-900/30 p-4 rounded-lg shadow-lg">
+                    <h2 class="text-lg font-bold text-purple-400 mb-3">Energía Mecánica (Aclaraciones y Tipos)</h2>
+                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <span class="block text-xs font-bold text-slate-500 uppercase">Cinética</span>
+                            $$ K = \frac{1}{2}mv^2 $$
+                        </div>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-500 uppercase">Potencial</span>
+                            $$ U_g = mgh $$
+                        </div>
+                        <div class="text-left border-l border-slate-700 pl-4">
+                            <span class="block text-xs font-bold text-slate-500 uppercase">Conservación</span>
+                            $$ E_i = E_f $$
+                            <p class="text-[10px] text-purple-300 mt-1">Si hay fricción: $E_i + W_{fr} = E_f$.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="termo" class="scroll-mt-20">
+                <h2 class="text-xl font-bold text-orange-400 mb-4 section-header theme-termo border-b border-orange-900/30 pb-2">Calor, Dilatación y Termodinámica</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-orange-400 font-bold text-sm mb-2">Calorimetría (P1-P4)</h3>
+                        $$ Q = mc\Delta T $$
+                        $$ Q_{latente} = mL $$
+                        <p class="text-[10px] text-slate-500 mt-1">Eq. Térmico: $\sum Q_{ganado} + \sum Q_{perdido} = 0$</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-orange-400 font-bold text-sm mb-2">Dilatación (P1 y P2)</h3>
+                        <p class="text-xs text-slate-400">Lineal:</p>
+                        $$ L_f = L_0(1 + \alpha \Delta T) $$
+                        <p class="text-xs text-slate-400 mt-1">Volumétrica:</p>
+                        $$ \Delta V = \gamma V_0 \Delta T $$
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-orange-400 font-bold text-sm mb-2">Termodinámica (P1-P3)</h3>
+                        $$ \Delta U = Q - W $$
+                        <ul class="text-[10px] text-slate-400 list-disc pl-4 space-y-1 mt-2">
+                            <li>Isotérmico: $\Delta T = 0$</li>
+                            <li>Isobarico: $P = cte$</li>
+                            <li>Adiabático: $Q = 0$</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="elec" class="scroll-mt-20">
+                <h2 class="text-xl font-bold text-amber-400 mb-4 section-header theme-elec border-b border-amber-900/30 pb-2">Electricidad y Resistencias</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-amber-400 font-bold text-sm mb-2">Conceptos Básicos (P1 y P2)</h3>
+                        $$ V = I \cdot R \text{ (Ohm)} $$
+                        $$ P = V \cdot I = I^2 R $$
+                        <p class="text-[10px] text-slate-500 mt-1">Ley de Coulomb: $F = k q_1 q_2 / r^2$</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                        <h3 class="text-amber-400 font-bold text-sm mb-2">Resistencias (Serie y Paralelo)</h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <span class="text-xs font-bold text-slate-500">Serie (Suma):</span>
+                                $$ R_{eq} = \sum R_i $$
+                                <span class="text-[10px] text-slate-600">$I$ constante.</span>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-500">Paralelo (Inversa):</span>
+                                $$ \frac{1}{R_{eq}} = \sum \frac{1}{R_i} $$
+                                <span class="text-[10px] text-slate-600">$V$ constante.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <aside id="calculadora-section" class="block xl:col-span-1 h-full order-2 mt-8 xl:mt-0">
+            <div class="sticky top-24 space-y-6">
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-4">
+                    <h3 class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-4 text-center">Calculadora Científica</h3>
+                    
+                    <div class="bg-black/40 border border-slate-700 rounded-lg p-4 mb-4 text-right font-mono relative">
+                        <div id="calc-preview" class="text-xs text-slate-500 absolute top-2 right-4 h-4"></div>
+                        <input type="text" id="calc-display" class="bg-transparent text-2xl text-emerald-400 w-full text-right outline-none" placeholder="0" readonly>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-2">
+                        <button onclick="inputCalc('sin(')" class="calc-btn p-2 bg-slate-800 text-cyan-400 text-xs rounded font-bold border border-slate-700">sin</button>
+                        <button onclick="inputCalc('cos(')" class="calc-btn p-2 bg-slate-800 text-cyan-400 text-xs rounded font-bold border border-slate-700">cos</button>
+                        <button onclick="inputCalc('tan(')" class="calc-btn p-2 bg-slate-800 text-cyan-400 text-xs rounded font-bold border border-slate-700">tan</button>
+                        <button onclick="clearCalc()" class="calc-btn p-2 bg-rose-900/20 text-rose-400 text-xs rounded font-bold border border-rose-900/40">AC</button>
+                        
+                        <button onclick="inputCalc('(')" class="calc-btn p-2 bg-slate-800 text-slate-400 text-xs rounded font-bold border border-slate-700">(</button>
+                        <button onclick="inputCalc(')')" class="calc-btn p-2 bg-slate-800 text-slate-400 text-xs rounded font-bold border border-slate-700">)</button>
+                        <button onclick="inputCalc('sqrt(')" class="calc-btn p-2 bg-slate-800 text-cyan-400 text-xs rounded font-bold border border-slate-700">√</button>
+                        <button onclick="inputCalc('^')" class="calc-btn p-2 bg-slate-800 text-cyan-400 text-xs rounded font-bold border border-slate-700">x^y</button>
+
+                        <button onclick="inputCalc('7')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">7</button>
+                        <button onclick="inputCalc('8')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">8</button>
+                        <button onclick="inputCalc('9')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">9</button>
+                        <button onclick="inputCalc('/')" class="calc-btn p-3 bg-indigo-900/50 text-indigo-300 rounded font-bold border border-indigo-900">÷</button>
+
+                        <button onclick="inputCalc('4')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">4</button>
+                        <button onclick="inputCalc('5')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">5</button>
+                        <button onclick="inputCalc('6')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">6</button>
+                        <button onclick="inputCalc('*')" class="calc-btn p-3 bg-indigo-900/50 text-indigo-300 rounded font-bold border border-indigo-900">×</button>
+
+                        <button onclick="inputCalc('1')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">1</button>
+                        <button onclick="inputCalc('2')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">2</button>
+                        <button onclick="inputCalc('3')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">3</button>
+                        <button onclick="inputCalc('-')" class="calc-btn p-3 bg-indigo-900/50 text-indigo-300 rounded font-bold border border-indigo-900">-</button>
+
+                        <button onclick="inputCalc('0')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">0</button>
+                        <button onclick="inputCalc('.')" class="calc-btn p-3 bg-slate-700 text-white rounded font-bold hover:bg-slate-600">.</button>
+                        <button onclick="inputCalc('pi')" class="calc-btn p-3 bg-slate-700 text-cyan-400 font-serif">π</button>
+                        <button onclick="inputCalc('+')" class="calc-btn p-3 bg-indigo-900/50 text-indigo-300 rounded font-bold border border-indigo-900">+</button>
+
+                        <button onclick="calculate()" class="calc-btn p-3 col-span-4 bg-emerald-600 text-white rounded font-bold hover:bg-emerald-500 shadow-lg border-t-2 border-emerald-400 mt-2">CALCULAR</button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg">
+                    <h3 class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-3 text-center border-b border-slate-800 pb-2">Constantes Útiles</h3>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Gravedad ($g$)</span> 
+                            <span class="text-emerald-400 bg-emerald-900/20 px-2 rounded">9.81 m/s²</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Vel. Luz ($c$)</span> 
+                            <span class="text-emerald-400 bg-emerald-900/20 px-2 rounded">3x10⁸ m/s</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">G. Universal ($G$)</span> 
+                            <span class="text-emerald-400 bg-emerald-900/20 px-2 rounded">6.67x10⁻¹¹</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">P. Atm ($P_0$)</span> 
+                            <span class="text-emerald-400 bg-emerald-900/20 px-2 rounded">101.3 kPa</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">C. Coulomb ($k_e$)</span> 
+                            <span class="text-emerald-400 bg-emerald-900/20 px-2 rounded">9x10⁹</span>
+                        </div>
+                    </div>
+
+                    <h3 class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-5 mb-3 text-center border-b border-slate-800 pb-2">Conversiones</h3>
+                    <div class="space-y-2 text-xs text-slate-400">
+                        <div class="flex justify-between border-b border-slate-800/50 pb-1">
+                            <span>1 hp (Caballo Fuerza)</span> <span>746 Watts</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800/50 pb-1">
+                            <span>1 cal (Caloría)</span> <span>4.184 Joules</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800/50 pb-1">
+                            <span>1 atm</span> <span>1.013x10⁵ Pa</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800/50 pb-1">
+                            <span>km/h &rarr; m/s</span> <span class="text-indigo-400 font-bold">Dividir entre 3.6</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>m/s &rarr; km/h</span> <span class="text-indigo-400 font-bold">Mult. por 3.6</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="h-10 xl:h-0"></div>
+        </aside>
+
+    </div>
+
+    <script>
+        const display = document.getElementById('calc-display');
+        const preview = document.getElementById('calc-preview');
+        
+        function inputCalc(val) {
+            if (display.value === 'Error') display.value = '';
+            display.value += val;
+        }
+
+        function clearCalc() {
+            display.value = '';
+            preview.innerText = '';
+        }
+
+        function calculate() {
+            let expr = display.value;
+            preview.innerText = expr + ' =';
+            
+            try {
+                const safeEval = expr
+                    .replace(/sin/g, 'Math.sin')
+                    .replace(/cos/g, 'Math.cos')
+                    .replace(/tan/g, 'Math.tan')
+                    .replace(/sqrt/g, 'Math.sqrt')
+                    .replace(/pi/g, 'Math.PI')
+                    .replace(/\^/g, '**');
+
+                let result = eval(safeEval);
+                if (!Number.isFinite(result) || isNaN(result)) throw new Error("Invalid");
+                display.value = Number.isInteger(result) ? result : parseFloat(result.toFixed(5));
+            } catch (e) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
