@@ -1,1 +1,583 @@
-math
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Completo de Matemáticas + Herramientas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        .topic-card { transition: transform 0.2s; }
+        .topic-card:hover { transform: translateY(-2px); }
+        .correct-answer { background-color: #dcfce7; border-color: #22c55e; color: #14532d; font-weight: bold; }
+        .incorrect-answer { background-color: #fee2e2; border-color: #ef4444; color: #7f1d1d; }
+        .btn-option { transition: all 0.2s; }
+        
+        /* Estilos Calculadora */
+        .calc-btn { 
+            background: #f1f5f9; 
+            padding: 10px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            transition: background 0.1s;
+        }
+        .calc-btn:hover { background: #e2e8f0; }
+        .calc-btn:active { background: #cbd5e1; transform: scale(0.98); }
+        .calc-op { background: #e0e7ff; color: #3730a3; }
+        .calc-eq { background: #4f46e5; color: white; }
+        .calc-eq:hover { background: #4338ca; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold"><i class="fas fa-square-root-alt mr-2 text-yellow-400"></i>Matemáticas Pro</h1>
+            <div class="hidden md:block text-sm bg-slate-800 px-3 py-1 rounded-full">Teoría • Práctica • Herramientas</div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+                <h3 class="text-xl font-bold mb-4 text-slate-700"><i class="fas fa-calculator mr-2"></i>Calculadora Científica</h3>
+                
+                <input type="text" id="calc-display" readonly class="w-full bg-slate-900 text-green-400 font-mono text-2xl p-4 rounded-lg mb-4 text-right overflow-hidden" placeholder="0">
+                
+                <div class="grid grid-cols-4 gap-2">
+                    <button onclick="calcInput('sin(')" class="calc-btn text-xs">sin</button>
+                    <button onclick="calcInput('cos(')" class="calc-btn text-xs">cos</button>
+                    <button onclick="calcInput('tan(')" class="calc-btn text-xs">tan</button>
+                    <button onclick="calcClear()" class="calc-btn bg-red-100 text-red-600">AC</button>
+                    
+                    <button onclick="calcInput('log(')" class="calc-btn text-xs">log</button>
+                    <button onclick="calcInput('ln(')" class="calc-btn text-xs">ln</button>
+                    <button onclick="calcInput('sqrt(')" class="calc-btn text-xs">√</button>
+                    <button onclick="calcInput('^')" class="calc-btn text-xs">^</button>
+
+                    <button onclick="calcInput('(')" class="calc-btn calc-op">(</button>
+                    <button onclick="calcInput(')')" class="calc-btn calc-op">)</button>
+                    <button onclick="calcInput('/')" class="calc-btn calc-op">÷</button>
+                    <button onclick="calcInput('*')" class="calc-btn calc-op">×</button>
+
+                    <button onclick="calcInput('7')" class="calc-btn">7</button>
+                    <button onclick="calcInput('8')" class="calc-btn">8</button>
+                    <button onclick="calcInput('9')" class="calc-btn">9</button>
+                    <button onclick="calcInput('-')" class="calc-btn calc-op">-</button>
+
+                    <button onclick="calcInput('4')" class="calc-btn">4</button>
+                    <button onclick="calcInput('5')" class="calc-btn">5</button>
+                    <button onclick="calcInput('6')" class="calc-btn">6</button>
+                    <button onclick="calcInput('+')" class="calc-btn calc-op">+</button>
+
+                    <button onclick="calcInput('1')" class="calc-btn">1</button>
+                    <button onclick="calcInput('2')" class="calc-btn">2</button>
+                    <button onclick="calcInput('3')" class="calc-btn">3</button>
+                    <button onclick="calcResult()" class="calc-btn calc-eq row-span-2 flex items-center justify-center">=</button>
+
+                    <button onclick="calcInput('0')" class="calc-btn col-span-2">0</button>
+                    <button onclick="calcInput('.')" class="calc-btn">.</button>
+                </div>
+            </div>
+
+	<div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200 flex flex-col">
+                <h3 class="text-xl font-bold mb-4 text-indigo-700"><i class="fas fa-sync-alt mr-2"></i>Ciclo de Potencias de i</h3>
+                
+                <div class="flex flex-row h-full items-center justify-around gap-4">
+                    
+                    <div class="w-1/2 relative">
+                        <svg viewBox="0 0 320 320" class="w-full h-auto bg-slate-50 rounded-full border border-slate-100">
+                            <line x1="40" y1="160" x2="280" y2="160" stroke="#334155" stroke-width="2" /> <line x1="160" y1="40" x2="160" y2="280" stroke="#334155" stroke-width="2" /> <text x="160" y="30" text-anchor="middle" class="text-2xl font-bold font-serif" fill="#0f172a">i</text>
+                            <text x="170" y="60" class="text-sm font-mono font-bold" fill="#2563eb">0.25</text>
+                            
+                            <text x="25" y="168" text-anchor="middle" class="text-2xl font-bold font-serif" fill="#0f172a">-1</text>
+                            <text x="50" y="150" class="text-sm font-mono font-bold" fill="#2563eb">0.50</text>
+
+                            <text x="160" y="305" text-anchor="middle" class="text-2xl font-bold font-serif" fill="#0f172a">-i</text>
+                            <text x="170" y="270" class="text-sm font-mono font-bold" fill="#2563eb">0.75</text>
+
+                            <text x="295" y="168" text-anchor="middle" class="text-2xl font-bold font-serif" fill="#0f172a">1</text>
+                            <text x="250" y="150" class="text-sm font-mono font-bold" fill="#2563eb">0.00</text>
+                        </svg>
+                    </div>
+
+                    <div class="w-1/2 pl-4 border-l border-gray-200">
+                        <h4 class="font-bold text-gray-700 mb-3 text-sm uppercase tracking-wide">Regla</h4>
+                        <ul class="space-y-2 font-serif text-lg text-slate-800 mb-6">
+                            <li>i<sup>1</sup> = i</li>
+                            <li>i<sup>2</sup> = -1</li>
+                            <li>i<sup>3</sup> = -i</li>
+                            <li>i<sup>4</sup> = 1</li>
+                        </ul>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <p class="font-bold text-blue-900 text-sm mb-2">Ejemplo Pizarra:</p>
+                            <div class="text-center">
+                                <span class="text-xl font-serif">i<sup>47</sup> = ?</span>
+                            </div>
+                            <hr class="my-2 border-blue-200">
+                            <p class="text-xs text-blue-800 mb-1">Dividir exponente entre 4:</p>
+                            <p class="font-mono text-center font-bold text-lg text-blue-600">47 ÷ 4 = 11.75</p>
+                            <p class="text-xs text-blue-800 mt-2">
+                                Termina en <strong class="text-blue-600">.75</strong> <br>
+                                → Corresponde a <strong class="text-black">-i</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        <div class="border-t border-gray-300 my-8"></div>
+
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-slate-800">Práctica por Temas</h2>
+            <p class="text-slate-600 mt-2">Resuelve los ejercicios para validar tu aprendizaje.</p>
+        </div>
+
+        <section class="topic-card bg-white rounded-lg shadow p-6 mb-8 border-t-4 border-blue-500">
+            <h3 class="text-2xl font-bold mb-2 text-blue-700">1. Números Reales y Complejos</h3>
+            
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">1.1. ¿Cuál de los siguientes es un número irracional?</p>
+                <div class="space-y-2" id="q1_1">
+                    <button onclick="check(this, 'q1_1', false, 'Es un entero.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) 5</button>
+                    <button onclick="check(this, 'q1_1', true, 'Correcto. No se puede expresar como fracción exacta.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $\sqrt{2}$</button>
+                    <button onclick="check(this, 'q1_1', false, 'Es racional (0.5).')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $1/2$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">1.2. Realiza la suma compleja: $(3 - 2i) + (-1 + 6i)$</p>
+                <div class="space-y-2" id="q1_2">
+                    <button onclick="check(this, 'q1_2', true, 'Suma reales (3-1=2) e imaginarios (-2+6=4).')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $2 + 4i$</button>
+                    <button onclick="check(this, 'q1_2', false, 'Revisa los signos de la parte imaginaria.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $2 - 4i$</button>
+                    <button onclick="check(this, 'q1_2', false, 'Revisa la parte real.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $4 + 4i$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-2">
+                <p class="font-semibold mb-2">1.3. Simplifica $i^2$</p>
+                <div class="space-y-2" id="q1_3">
+                    <button onclick="check(this, 'q1_3', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $1$</button>
+                    <button onclick="check(this, 'q1_3', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $0$</button>
+                    <button onclick="check(this, 'q1_3', true, 'Por definición, la unidad imaginaria al cuadrado es -1.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $-1$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+        </section>
+
+        <section class="topic-card bg-white rounded-lg shadow p-6 mb-8 border-t-4 border-emerald-500">
+            <h3 class="text-2xl font-bold mb-2 text-emerald-700">2. Exponentes y Radicales</h3>
+            
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">2.1. Simplifica: $x^3 \cdot x^5$</p>
+                <div class="space-y-2" id="q2_1">
+                    <button onclick="check(this, 'q2_1', false, 'No se multiplican los exponentes.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $x^{15}$</button>
+                    <button onclick="check(this, 'q2_1', true, 'En multiplicación de misma base, se suman exponentes.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $x^8$</button>
+                    <button onclick="check(this, 'q2_1', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $2x^8$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">2.2. Convierte a exponente positivo: $2^{-3}$</p>
+                <div class="space-y-2" id="q2_2">
+                    <button onclick="check(this, 'q2_2', false, 'El signo de la base no cambia.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $-6$</button>
+                    <button onclick="check(this, 'q2_2', true, 'El exponente negativo invierte la base: 1/(2^3) = 1/8.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $\frac{1}{8}$</button>
+                    <button onclick="check(this, 'q2_2', false, 'No es resta.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $-8$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-2">
+                <p class="font-semibold mb-2">2.3. Simplifica el radical: $\sqrt{25x^2}$</p>
+                <div class="space-y-2" id="q2_3">
+                    <button onclick="check(this, 'q2_3', true, 'Raíz de 25 es 5, raíz de x^2 es x.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $5x$</button>
+                    <button onclick="check(this, 'q2_3', false, 'La raíz de 25 no es 25.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $25x$</button>
+                    <button onclick="check(this, 'q2_3', false, 'Falta la raíz de x.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $5$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+        </section>
+
+        <section class="topic-card bg-white rounded-lg shadow p-6 mb-8 border-t-4 border-orange-500">
+            <h3 class="text-2xl font-bold mb-2 text-orange-700">3. Expresiones Algebraicas</h3>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">3.1. Factoriza: $x^2 - 9$</p>
+                <div class="space-y-2" id="q3_1">
+                    <button onclick="check(this, 'q3_1', false, 'Esto daría x^2 - 6x + 9.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $(x-3)^2$</button>
+                    <button onclick="check(this, 'q3_1', true, 'Diferencia de cuadrados: (x-a)(x+a).')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $(x-3)(x+3)$</button>
+                    <button onclick="check(this, 'q3_1', false, 'Signos incorrectos.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $(x+3)(x+3)$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">3.2. Simplifica: $\frac{2x}{4x^2}$</p>
+                <div class="space-y-2" id="q3_2">
+                    <button onclick="check(this, 'q3_2', true, 'Simplificamos 2/4 a 1/2 y x/x^2 a 1/x.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $\frac{1}{2x}$</button>
+                    <button onclick="check(this, 'q3_2', false, 'La x queda abajo.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $2x$</button>
+                    <button onclick="check(this, 'q3_2', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $\frac{x}{2}$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-2">
+                <p class="font-semibold mb-2">3.3. Suma: $\frac{1}{a} + \frac{1}{b}$</p>
+                <div class="space-y-2" id="q3_3">
+                    <button onclick="check(this, 'q3_3', false, 'No se suman denominadores directamente.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $\frac{2}{a+b}$</button>
+                    <button onclick="check(this, 'q3_3', true, 'Denominador común es ab.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $\frac{b+a}{ab}$</button>
+                    <button onclick="check(this, 'q3_3', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $\frac{1}{ab}$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+        </section>
+
+        <section class="topic-card bg-white rounded-lg shadow p-6 mb-8 border-t-4 border-red-500">
+            <h3 class="text-2xl font-bold mb-2 text-red-700">4. Ecuaciones y Desigualdades</h3>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">4.1. Resuelve: $2x + 4 = 12$</p>
+                <div class="space-y-2" id="q4_1">
+                    <button onclick="check(this, 'q4_1', true, '2x = 8, entonces x = 4.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $4$</button>
+                    <button onclick="check(this, 'q4_1', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $8$</button>
+                    <button onclick="check(this, 'q4_1', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $6$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">4.2. Raíces de: $x^2 - 4x = 0$</p>
+                <div class="space-y-2" id="q4_2">
+                    <button onclick="check(this, 'q4_2', false, 'Falta una raíz.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) Solo $4$</button>
+                    <button onclick="check(this, 'q4_2', true, 'Factorizando x(x-4)=0, las raíces son 0 y 4.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $0$ y $4$</button>
+                    <button onclick="check(this, 'q4_2', false, 'Signos incorrectos.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $2$ y $-2$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-2">
+                <p class="font-semibold mb-2">4.3. Desigualdad: $-3x < 9$ (¡Ojo con el signo!)</p>
+                <div class="space-y-2" id="q4_3">
+                    <button onclick="check(this, 'q4_3', false, 'Debes invertir el signo al dividir por negativo.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $x < -3$</button>
+                    <button onclick="check(this, 'q4_3', true, 'Al dividir por -3, el operador < cambia a >.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $x > -3$</button>
+                    <button onclick="check(this, 'q4_3', false, 'El resultado numérico es incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $x > 3$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+        </section>
+
+        <section class="topic-card bg-white rounded-lg shadow p-6 mb-8 border-t-4 border-purple-500">
+            <h3 class="text-2xl font-bold mb-2 text-purple-700">5. Sistemas y Fracciones Parciales</h3>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">5.1. Resuelve el sistema: <br> $x + y = 6$ <br> $x - y = 2$</p>
+                <div class="space-y-2" id="q5_1">
+                    <button onclick="check(this, 'q5_1', false, 'Suma incorrecta.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $x=3, y=3$</button>
+                    <button onclick="check(this, 'q5_1', true, 'Sumando: 2x=8 -> x=4. Entonces 4+y=6 -> y=2.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $x=4, y=2$</button>
+                    <button onclick="check(this, 'q5_1', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $x=5, y=1$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">5.2. Geométricamente, la solución de un sistema lineal 2x2 es:</p>
+                <div class="space-y-2" id="q5_2">
+                    <button onclick="check(this, 'q5_2', true, 'Es donde ambas rectas se cruzan.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) Intersección de rectas</button>
+                    <button onclick="check(this, 'q5_2', false, 'Eso sería para cuadráticas.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) Una parábola</button>
+                    <button onclick="check(this, 'q5_2', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) El área bajo la curva</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-2">
+                <p class="font-semibold mb-2">5.3. Fracciones parciales: Forma de descomponer $\frac{1}{(x+1)(x-2)}$</p>
+                <div class="space-y-2" id="q5_3">
+                    <button onclick="check(this, 'q5_3', false, 'Faltan constantes separadas.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $\frac{A}{(x+1)(x-2)}$</button>
+                    <button onclick="check(this, 'q5_3', true, 'Factores lineales distintos se separan con constantes A y B.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $\frac{A}{x+1} + \frac{B}{x-2}$</button>
+                    <button onclick="check(this, 'q5_3', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $A(x+1) + B(x-2)$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+        </section>
+
+        <section class="topic-card bg-white rounded-lg shadow p-6 mb-8 border-t-4 border-pink-500">
+            <h3 class="text-2xl font-bold mb-2 text-pink-700">6. Polinomios y División Sintética</h3>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">6.1. Grado del polinomio: $f(x) = 4x^5 - 2x^3 + x$</p>
+                <div class="space-y-2" id="q6_1">
+                    <button onclick="check(this, 'q6_1', true, 'El grado es el exponente mayor.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) 5</button>
+                    <button onclick="check(this, 'q6_1', false, 'Es el coeficiente, no el grado.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) 4</button>
+                    <button onclick="check(this, 'q6_1', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) 3</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">6.2. Teorema del Residuo: Si divides $P(x)$ entre $(x-c)$, el residuo es:</p>
+                <div class="space-y-2" id="q6_2">
+                    <button onclick="check(this, 'q6_2', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $P(0)$</button>
+                    <button onclick="check(this, 'q6_2', true, 'Exacto, evaluamos la función en c.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $P(c)$</button>
+                    <button onclick="check(this, 'q6_2', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $c$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-2">
+                <p class="font-semibold mb-2">6.3. Si $P(1) = 0$, entonces:</p>
+                <div class="space-y-2" id="q6_3">
+                    <button onclick="check(this, 'q6_3', true, 'Teorema del factor.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $(x-1)$ es un factor de P(x)</button>
+                    <button onclick="check(this, 'q6_3', false, 'Signo incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $(x+1)$ es un factor</button>
+                    <button onclick="check(this, 'q6_3', false, 'No necesariamente.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) El residuo es 1</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+        </section>
+
+        <section class="topic-card bg-white rounded-lg shadow p-6 mb-8 border-t-4 border-yellow-500">
+            <h3 class="text-2xl font-bold mb-2 text-yellow-700">7. Teorema del Binomio y Pascal</h3>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">7.1. Los coeficientes de la fila n=2 en Pascal son:</p>
+                <div class="space-y-2" id="q7_1">
+                    <button onclick="check(this, 'q7_1', false, 'Fila n=1.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) 1, 1</button>
+                    <button onclick="check(this, 'q7_1', true, 'Corresponde a (a+b)^2 = a^2 + 2ab + b^2.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) 1, 2, 1</button>
+                    <button onclick="check(this, 'q7_1', false, 'Fila n=3.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) 1, 3, 3, 1</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">7.2. Calcula $3!$ (3 factorial)</p>
+                <div class="space-y-2" id="q7_2">
+                    <button onclick="check(this, 'q7_2', false, 'Suma incorrecta.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) 3</button>
+                    <button onclick="check(this, 'q7_2', true, '3 x 2 x 1 = 6.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) 6</button>
+                    <button onclick="check(this, 'q7_2', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) 9</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-2">
+                <p class="font-semibold mb-2">7.3. Primer término de $(x+3)^3$</p>
+                <div class="space-y-2" id="q7_3">
+                    <button onclick="check(this, 'q7_3', true, 'Es x elevado a la n.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $x^3$</button>
+                    <button onclick="check(this, 'q7_3', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $3x^2$</button>
+                    <button onclick="check(this, 'q7_3', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $27$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+        </section>
+
+        <section class="topic-card bg-white rounded-lg shadow p-6 mb-8 border-t-4 border-cyan-500">
+            <h3 class="text-2xl font-bold mb-2 text-cyan-700">8. Exponenciales y Logarítmicas</h3>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">8.1. Convierte a logaritmo: $5^2 = 25$</p>
+                <div class="space-y-2" id="q8_1">
+                    <button onclick="check(this, 'q8_1', true, 'Base 5, argumento 25, resultado 2.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $\log_5(25) = 2$</button>
+                    <button onclick="check(this, 'q8_1', false, 'Base incorrecta.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $\log_2(25) = 5$</button>
+                    <button onclick="check(this, 'q8_1', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $\log_{25}(5) = 2$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-6 pb-4 border-b">
+                <p class="font-semibold mb-2">8.2. Propiedad: $\log(a \cdot b)$ es igual a:</p>
+                <div class="space-y-2" id="q8_2">
+                    <button onclick="check(this, 'q8_2', false, 'No se multiplican logaritmos.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) $\log(a) \cdot \log(b)$</button>
+                    <button onclick="check(this, 'q8_2', true, 'El logaritmo de un producto es la suma de logaritmos.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) $\log(a) + \log(b)$</button>
+                    <button onclick="check(this, 'q8_2', false, 'Eso es para división.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $\log(a) - \log(b)$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+
+            <div class="mb-2">
+                <p class="font-semibold mb-2">8.3. Valor de $\ln(e)$ (Logaritmo natural de e)</p>
+                <div class="space-y-2" id="q8_3">
+                    <button onclick="check(this, 'q8_3', false, 'Incorrecto.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">A) 0</button>
+                    <button onclick="check(this, 'q8_3', true, 'La base de ln es e, por lo que el logaritmo es 1.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">B) 1</button>
+                    <button onclick="check(this, 'q8_3', false, 'e vale aprox 2.718.')" class="w-full text-left p-2 rounded border hover:bg-gray-50 btn-option">C) $e$</button>
+                </div>
+                <div class="mt-2 text-sm hidden explanation"></div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-500 text-sm pb-10">
+            Curso de Matemáticas &copy; 2025
+        </footer>
+    </div>
+
+    <script>
+        // =======================
+        // LÓGICA DE EJERCICIOS
+        // =======================
+        function check(btn, questionId, isCorrect, explanationText) {
+            const container = document.getElementById(questionId);
+            const buttons = container.querySelectorAll('button');
+            const explanationDiv = container.nextElementSibling;
+
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.add('cursor-not-allowed', 'opacity-60');
+            });
+
+            if (isCorrect) {
+                btn.classList.remove('hover:bg-gray-50');
+                btn.classList.add('correct-answer');
+                btn.innerHTML += ' <i class="fas fa-check float-right mt-1"></i>';
+            } else {
+                btn.classList.remove('hover:bg-gray-50');
+                btn.classList.add('incorrect-answer');
+                btn.innerHTML += ' <i class="fas fa-times float-right mt-1"></i>';
+            }
+
+            explanationDiv.innerHTML = `<strong class="${isCorrect ? 'text-green-700' : 'text-red-700'}">${isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> ${explanationText}`;
+            explanationDiv.classList.remove('hidden');
+            explanationDiv.classList.add('block', 'bg-blue-50', 'p-3', 'rounded', 'text-blue-900', 'border', 'border-blue-200');
+        }
+
+        // =======================
+        // LÓGICA DE CALCULADORA
+        // =======================
+        let calcValue = "";
+        function calcInput(val) {
+            calcValue += val;
+            document.getElementById('calc-display').value = calcValue;
+        }
+        function calcClear() {
+            calcValue = "";
+            document.getElementById('calc-display').value = "";
+        }
+        function calcResult() {
+            try {
+                // Reemplazos de seguridad y sintaxis JS
+                let expression = calcValue
+                    .replace(/sin/g, 'Math.sin')
+                    .replace(/cos/g, 'Math.cos')
+                    .replace(/tan/g, 'Math.tan')
+                    .replace(/log/g, 'Math.log10')
+                    .replace(/ln/g, 'Math.log')
+                    .replace(/sqrt/g, 'Math.sqrt')
+                    .replace(/\^/g, '**');
+
+                const result = eval(expression);
+                document.getElementById('calc-display').value = result;
+                calcValue = result.toString();
+            } catch (e) {
+                document.getElementById('calc-display').value = "Error";
+                calcValue = "";
+            }
+        }
+
+        // =======================
+        // LÓGICA PLANO DE ARGAND
+        // =======================
+        let argandChart;
+
+        function initArgand() {
+            const ctx = document.getElementById('argandChart').getContext('2d');
+            argandChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Número Complejo (z)',
+                        data: [{x: 3, y: 4}],
+                        backgroundColor: '#4f46e5',
+                        pointRadius: 6
+                    }, {
+                        // Línea desde el origen (vector)
+                        type: 'line',
+                        label: 'Vector',
+                        data: [{x:0, y:0}, {x:3, y:4}],
+                        borderColor: '#4f46e5',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'center',
+                            title: { display: true, text: 'Real (Re)' },
+                            min: -10, max: 10,
+                            grid: { color: '#e2e8f0' }
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'center',
+                            title: { display: true, text: 'Imaginario (Im)' },
+                            min: -10, max: 10,
+                            grid: { color: '#e2e8f0' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `z = ${context.parsed.x} + ${context.parsed.y}i`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            updateArgandDisplay(3, 4);
+        }
+
+        function updateArgand() {
+            const re = parseFloat(document.getElementById('realPart').value) || 0;
+            const im = parseFloat(document.getElementById('imagPart').value) || 0;
+
+            // Actualizar punto y vector
+            argandChart.data.datasets[0].data = [{x: re, y: im}];
+            argandChart.data.datasets[1].data = [{x: 0, y: 0}, {x: re, y: im}];
+            
+            // Ajustar escala si se sale del rango actual (dinámico simple)
+            const maxVal = Math.max(Math.abs(re), Math.abs(im), 10);
+            argandChart.options.scales.x.min = -maxVal - 1;
+            argandChart.options.scales.x.max = maxVal + 1;
+            argandChart.options.scales.y.min = -maxVal - 1;
+            argandChart.options.scales.y.max = maxVal + 1;
+
+            argandChart.update();
+            updateArgandDisplay(re, im);
+        }
+
+        function updateArgandDisplay(re, im) {
+            // Calcular módulo
+            const mod = Math.sqrt(re*re + im*im).toFixed(2);
+            // Calcular argumento (ángulo) en grados
+            let ang = (Math.atan2(im, re) * 180 / Math.PI).toFixed(2);
+            document.getElementById('modulusDisplay').innerHTML = 
+                `Módulo |z| = <span class="text-indigo-600 font-bold">${mod}</span> &nbsp;|&nbsp; Argumento θ = <span class="text-indigo-600 font-bold">${ang}°</span>`;
+        }
+
+        // Iniciar gráfico al cargar
+        window.onload = initArgand;
+    </script>
+</body>
+</html>
